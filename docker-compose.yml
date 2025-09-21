@@ -1,4 +1,4 @@
-version: "3.8"
+
 
 services:
     laravel.test:
@@ -80,6 +80,17 @@ services:
         depends_on:
             - pgsql
         restart: unless-stopped
+
+    redisinsight:
+        image: redislabs/redisinsight:latest
+        container_name: redis_insight
+        ports:
+            - "3002:5540" # ahora sí apunta al puerto real
+        networks:
+            - sail
+        restart: unless-stopped
+        depends_on:
+            - redis
 
 networks:
     sail:
